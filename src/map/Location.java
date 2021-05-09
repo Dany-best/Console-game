@@ -1,10 +1,17 @@
+package map;
+
 import java.util.*;
 
 public class Location {
     int id;
     String name;
     String description;
-    List <Location> locations;
+    public List <Location> locations;
+    static int locationsSize = 6;
+
+    public int getLocationsSize() {
+        return locations.size();
+    }
 
     public Location(int id, String name, String description, LocationType locationType) {
         this.id = id;
@@ -17,9 +24,10 @@ public class Location {
                 new Location(2, "Протоптанная дорога", "здесь ничего", LocationType.NOTHING),
                 new Location(3, "Чаща", "тут есть что то интересное", LocationType.LOOT),
                 new Location(4, "Опасная тропа", "ведет к грибному месту", LocationType.DANGER),
-                new Location(5, "Родник", "а здесь спокойно", LocationType.NOTHING),
+                new Location(5, "Родник", "а здесь спокойно", LocationType.LOOT),
                 new Location(6, "Грибное место", "здесь можно собрать грибы", LocationType.LOOT)
         ));
+
     }
 
     public Location getLocationById (int id) {

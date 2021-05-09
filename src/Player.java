@@ -1,8 +1,6 @@
-import items.DroppedItem;
 import items.Item;
 import items.PlayerInventory;
-
-import java.util.Arrays;
+import map.Location;
 
 public class Player {
     int health;
@@ -23,9 +21,7 @@ public class Player {
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
         }
-
     }
-
 
     public void go(int id) {
         int []arr = location.getNext(playerLocation);
@@ -38,12 +34,20 @@ public class Player {
             }
         }
         if (!check) {
-            System.err.println("Incorrect way choose another one");
+            System.err.println("Incorrect way, choose another one");
         }
         else {
             playerLocation = location.getLocationById(remind);
         }
     }
+
+    public void checkHealth() {
+        if (health <= 0) {
+            System.out.println("Your health is " + "health\nGame over");
+            System.exit(0);
+        }
+    }
+
     public void pickUpItem(Item item) {
 
     }
