@@ -7,7 +7,6 @@ public class Location {
     String name;
     String description;
     public List <Location> locations;
-    static int locationsSize = 6;
 
     public int getLocationsSize() {
         return locations.size();
@@ -18,6 +17,7 @@ public class Location {
         this.name = name;
         this.description = description;
     }
+
     public Location() {
         locations = new ArrayList<>(Arrays.asList(
                 new Location(1, "Опушка леса", "рядом есть торговец", LocationType.SELLER),
@@ -27,7 +27,6 @@ public class Location {
                 new Location(5, "Родник", "а здесь спокойно", LocationType.LOOT),
                 new Location(6, "Грибное место", "здесь можно собрать грибы", LocationType.LOOT)
         ));
-
     }
 
     public Location getLocationById (int id) {

@@ -27,11 +27,19 @@ public class ItemGenerator extends Item {
         }
     }
 
+    public String getItemArray(int index) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < items.get(index).length; i++) {
+            stringBuilder.append(items.get(i)).append(", ");
+        }
+        return stringBuilder.toString();
+    }
     public String printList() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < items.get(i).length; j++) {
-                stringBuilder.append(items.get(i)[j] + ", ");
+                stringBuilder.append(items.get(i)[j]).append(", ");
             }
             stringBuilder.append('\n');
         }

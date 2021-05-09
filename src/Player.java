@@ -21,6 +21,22 @@ public class Player {
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
         }
+        System.out.println();
+    }
+
+    public void printAvailableLocations() {
+        int []arr = location.getNext(playerLocation);
+        System.out.println("Available locations:");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(i + 1 +" " + location.locations.get(arr[i]));
+        }
+        System.out.println();
+    }
+
+    public void printCurrentLocation() {
+        System.out.println("Current location is");
+        System.out.println(playerLocation);
+        System.out.println();
     }
 
     public void go(int id) {
@@ -39,6 +55,7 @@ public class Player {
         else {
             playerLocation = location.getLocationById(remind);
         }
+        System.out.println();
     }
 
     public void checkHealth() {
@@ -46,6 +63,7 @@ public class Player {
             System.out.println("Your health is " + "health\nGame over");
             System.exit(0);
         }
+        System.out.println();
     }
 
     public void pickUpItem(Item item) {
