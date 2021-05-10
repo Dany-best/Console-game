@@ -15,6 +15,13 @@ public class ItemGenerator extends Item {
             new Item("Нож", 10, 80)
     };
 
+    public int getArrItemsLength() {
+        return arr_items.length;
+    }
+    public int getItemListSize() {
+        return items.size();
+    }
+
     public void generateItems() {
         for (int i = 0; i < 6; i++) {
             int rand = new Random().nextInt(arr_items.length);
@@ -31,11 +38,15 @@ public class ItemGenerator extends Item {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < items.get(index).length; i++) {
-            stringBuilder.append(items.get(i)).append(", ");
+            stringBuilder.append(items.get(index)[i]);
+            if (i < items.get(index).length - 1) {
+                stringBuilder.append(", ");
+            }
         }
         return stringBuilder.toString();
     }
-    public String printList() {
+
+    public void printList() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < items.get(i).length; j++) {
@@ -43,6 +54,6 @@ public class ItemGenerator extends Item {
             }
             stringBuilder.append('\n');
         }
-        return stringBuilder.toString();
+        System.out.println(stringBuilder.toString());
     }
 }

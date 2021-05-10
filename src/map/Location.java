@@ -8,10 +8,6 @@ public class Location {
     String description;
     public List <Location> locations;
 
-    public int getLocationsSize() {
-        return locations.size();
-    }
-
     public Location(int id, String name, String description, LocationType locationType) {
         this.id = id;
         this.name = name;

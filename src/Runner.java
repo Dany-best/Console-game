@@ -1,4 +1,7 @@
+import items.ItemGenerator;
+
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Runner {
@@ -9,15 +12,18 @@ public class Runner {
         if (scanner.nextLine().length() != 0)
             return ;
         Player player = new Player();
+        ItemGenerator itemGenerator = new ItemGenerator();
+        itemGenerator.generateItems();
         player.lookAround();
 
         while (true) {
-            System.out.println("What would you like to do? ");
-            System.out.println("1: Go somewhere");
-            System.out.println("2: Pickup item");
-            System.out.println("3: Look around");
             int check;
+            int rand;
 
+            System.out.println("What would you like to do?\n" +
+                    "1: Go somewhere\n" +
+                    "2: Pickup item\n" +
+                    "3: Look around\n");
             try {
                 check = scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -36,10 +42,13 @@ public class Runner {
                 player.go(way);
                 player.lookAround();
             }
+            else if (check == 2) {
+                rand = new Random().nextInt(itemGenerator.getItemListSize() - 1);
+                System.out.println(itemGenerator.getItemArray(rand));
+            }
             else if (check == 3) {
                 player.lookAround();
             }
-            check = 0;
         }
 
     }
