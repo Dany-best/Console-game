@@ -20,10 +20,8 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", cost=" + cost +
-                '}';
+        return name +
+                ", вес = " + weight +
+                ", стоимость = " + cost;
     }
 }

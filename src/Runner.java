@@ -23,7 +23,8 @@ public class Runner {
             System.out.println("What would you like to do?\n" +
                     "1: Go somewhere\n" +
                     "2: Pickup item\n" +
-                    "3: Look around\n");
+                    "3: Look around\n" +
+                    "4: Close game\n");
             try {
                 check = scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -31,7 +32,7 @@ public class Runner {
                 scanner = new Scanner(System.in);
                 continue;
             }
-            if (check > 3 || check <= 0) {
+            if (check > 4 || check <= 0) {
                 System.err.println("Incorrect parameter\n");
                 continue;
             }
@@ -48,6 +49,9 @@ public class Runner {
             }
             else if (check == 3) {
                 player.lookAround();
+            }
+            else if (check == 4) {
+                return ;
             }
         }
 

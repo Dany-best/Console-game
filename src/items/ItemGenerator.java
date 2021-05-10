@@ -38,10 +38,10 @@ public class ItemGenerator extends Item {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < items.get(index).length; i++) {
-            stringBuilder.append(items.get(index)[i]);
-            if (i < items.get(index).length - 1) {
-                stringBuilder.append(", ");
-            }
+            stringBuilder.append(items.get(index)[i]).append('\n');
+//            if (i < items.get(index).length - 1) {
+//                stringBuilder.append(", ");
+//            }
         }
         return stringBuilder.toString();
     }
