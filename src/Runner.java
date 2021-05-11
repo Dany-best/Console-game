@@ -16,10 +16,9 @@ public class Runner {
         itemGenerator.generateItems();
         player.lookAround();
 
-        int way = 0;
+        int way;
         while (true) {
             int check;
-            int rand;
 
             System.out.println("Что вы хотите сделать?\n" +
                     "1: Идти\n" +
@@ -49,10 +48,15 @@ public class Runner {
                 player.lookAround();
             }
             else if (check == 2) {
-//                rand = new Random().nextInt(itemGenerator.getItemListSize() - 1);
+                int itemIndex;
+                player.playerInventory.printInventoryList();
                 System.out.println("Какой предмет вы хотите взять?");
                 System.out.println(itemGenerator.getItemArray(player.playerLocation.id - 1));
+                itemIndex = scanner.nextInt();
+                player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
+                        itemIndex));
 
+                player.playerInventory.printInventoryList();
             }
             else if (check == 3) {
                 player.lookAround();

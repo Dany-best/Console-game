@@ -19,6 +19,7 @@ public class ItemGenerator extends Item {
     public int getArrItemsLength() {
         return arr_items.length;
     }
+
     public int getItemListSize() {
         return items.size();
     }
@@ -42,6 +43,14 @@ public class ItemGenerator extends Item {
             stringBuilder.append(items.get(index)[i]).append('\n');
         }
         return stringBuilder.toString();
+    }
+
+    public Item getItemFromArray(int arrayIndex, int itemIndex) {
+        return items.get(arrayIndex)[itemIndex];
+    }
+
+    public void removeItemFromMap(int arrayIndex, int itemIndex) {
+
     }
 
     public void printList() {
