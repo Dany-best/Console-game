@@ -3,7 +3,7 @@ package map;
 import java.util.*;
 
 public class Location {
-    int id;
+    public int id;
     String name;
     String description;
     public List <Location> locations;
@@ -28,6 +28,7 @@ public class Location {
     public Location getLocationById (int id) {
         return locations.get(id);
     }
+
 
     public int[] getNext(Location location) {
         switch (location.id) {

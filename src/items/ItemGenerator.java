@@ -15,6 +15,7 @@ public class ItemGenerator extends Item {
             new Item("Нож", 10, 80)
     };
 
+
     public int getArrItemsLength() {
         return arr_items.length;
     }
@@ -39,9 +40,6 @@ public class ItemGenerator extends Item {
 
         for (int i = 0; i < items.get(index).length; i++) {
             stringBuilder.append(items.get(index)[i]).append('\n');
-//            if (i < items.get(index).length - 1) {
-//                stringBuilder.append(", ");
-//            }
         }
         return stringBuilder.toString();
     }

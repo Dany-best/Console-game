@@ -1,14 +1,10 @@
-import items.Item;
 import items.ItemGenerator;
-import jdk.jfr.StackTrace;
-import org.w3c.dom.ls.LSOutput;
+import org.junit.*;
 
-import java.util.Scanner;
+import static junit.framework.TestCase.fail;
+
 
 public class LocationTest {
-    public static void main(String[] args) {
-        ItemGenerator itemGenerator = new ItemGenerator();
-        itemGenerator.generateItems();
-        itemGenerator.printList();
-    }
+
+
 }

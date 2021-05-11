@@ -14,9 +14,9 @@ public class Player {
     }
 
     public void lookAround() {
-        System.out.println("Current location is");
+        System.out.println("Ваша локация:");
         System.out.println(playerLocation);
-        System.out.println("Available locations:");
+        System.out.println("Доступные локации:");
         int []arr = location.getNext(playerLocation);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
@@ -26,7 +26,7 @@ public class Player {
 
     public void printAvailableLocations() {
         int []arr = location.getNext(playerLocation);
-        System.out.println("Available locations:");
+        System.out.println("Доступные локации:");
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
         }
@@ -34,7 +34,7 @@ public class Player {
     }
 
     public void printCurrentLocation() {
-        System.out.println("Current location is");
+        System.out.println("Текущая локация");
         System.out.println(playerLocation);
         System.out.println();
     }
@@ -50,7 +50,7 @@ public class Player {
             }
         }
         if (!check) {
-            System.err.println("Incorrect way, choose another one");
+            System.err.println("Неверный путь, выберите другой");
         }
         else {
             playerLocation = location.getLocationById(remind);
