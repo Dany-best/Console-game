@@ -9,7 +9,7 @@ public class Item {
     String name;
     int weight;
     int cost;
-    public ArrayList <Item[]> items = new ArrayList<>();
+    public ArrayList <ArrayList<Item>> items = new ArrayList<>();
 
     public Item() {}
     public Item(String name, int weight, int cost) {

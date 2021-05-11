@@ -1,7 +1,6 @@
 import items.ItemGenerator;
 
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Runner {
@@ -53,9 +52,11 @@ public class Runner {
                 System.out.println("Какой предмет вы хотите взять?");
                 System.out.println(itemGenerator.getItemArray(player.playerLocation.id - 1));
                 itemIndex = scanner.nextInt();
+                if (itemIndex == 100)
+                    continue;
                 player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
-                        itemIndex));
-
+                        itemIndex - 1));
+                itemGenerator.removeItemFromMap(player.playerLocation.id - 1, itemIndex - 1);
                 player.playerInventory.printInventoryList();
             }
             else if (check == 3) {
