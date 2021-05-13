@@ -2,40 +2,48 @@ package items;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
 
 public class ItemGenerator extends Item {
 
     static Item[] arr_items = {
-            new Item("Поганка", 2, 1),
-            new Item("Белый гриб", 4, 10),
-            new Item("Драгоценность", 10, 100),
-            new Item("Бинт", 5, 40),
-            new Item("Мухомор", 3, 1),
-            new Item("Шампиньонs", 5, 5),
-            new Item("Монеты", 0, 1),
-            new Item("Нож", 10, 80)
+            new Item("Поганка", 2, 1, true),
+            new Item("Белый гриб", 4, 10, true),
+            new Item("Драгоценность", 10, 100, false),
+            new Item("Бинт", 5, 40, true),
+            new Item("Мухомор", 3, 1, true),
+            new Item("Шампиньонs", 5, 5, true),
+            new Item("Монеты", 0, 1, false),
+            new Item("Нож", 10, 80, false)
     };
 
 
-    public int getArrItemsLength() {
-        return arr_items.length;
-    }
-
-    public int getItemListSize() {
-        return items.size();
+    /*
+        random item generation for locations according to type location
+     */
+    private int getRandom(int arrayPosition) {
+        switch (arrayPosition) {
+            case 0: return 2;
+            case 1: return 1;
+            case 2: return 3;
+            case 4: return 5;
+            case 5: return 8;
+            default: return 4;
+        }
     }
 
     public void generateItems() {
         for (int i = 0; i < 6; i++) {
-            int rand = new Random().nextInt(arr_items.length);
+            int rand = getRandom(i);
             ArrayList<Item> arr = new ArrayList<>();
-//            Item []arr = new Item[rand];
             for (int j = 0; j < rand; j++) {
-                int secondRand = new Random().nextInt(arr_items.length);
+                int secondRand = new Random().nextInt(arr_items.length) ;
                 arr.add(j, arr_items[secondRand]);
             }
             items.add(arr);
         }
+
     }
 
     public String getItemArray(int index) {
@@ -45,6 +53,10 @@ public class ItemGenerator extends Item {
             stringBuilder.append(i + 1).append(": ").append(items.get(index).get(i)).append('\n');
         }
         return stringBuilder.toString();
+    }
+
+    public int getItemsArrayLen(int index) {
+        return items.get(index).size();
     }
 
     public Item getItemFromArray(int arrayIndex, int itemIndex) {

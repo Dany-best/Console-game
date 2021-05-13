@@ -3,8 +3,9 @@ import items.PlayerInventory;
 import map.Location;
 
 public class Player {
-    int health;
+    int health = 100;
     long money;
+    public int hunger;
     PlayerInventory playerInventory = new PlayerInventory();
     Location playerLocation;
     Location location = new Location();
@@ -34,9 +35,7 @@ public class Player {
     }
 
     public void printCurrentLocation() {
-        System.out.println("Текущая локация");
-        System.out.println(playerLocation);
-        System.out.println();
+        System.out.println("Текущая локация" + playerLocation + "\n");
     }
 
     public void go(int id) {
@@ -66,17 +65,29 @@ public class Player {
         System.out.println();
     }
 
-    public void pickUpItem(Item item) {
-
+    public void useItem(Item item) {
+        switch (item.getName()) {
+            case "Поганка":
+                hunger += 10; health -= 10; break;
+            case "Белый гриб":
+                hunger += 10; break;
+            case "Бинт":
+                health += 30; break;
+            case "Мухомор":
+                hunger += 20; health -= 20; break;
+            case "Шампиньонs" :
+                hunger += 15; break;
+        }
+        playerInventory.deleteItemFromInventory(item);
     }
+
     public void dropItem(Item item) {
 
     }
+
     public void take(Item item) {
         playerInventory.putIntoInventory(item);
     }
-    public void use(Item item) {
 
-    }
 
 }

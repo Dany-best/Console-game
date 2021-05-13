@@ -1,21 +1,86 @@
 package items;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class PlayerInventory {
-    List<Item> items = new ArrayList<>();
+    public List<Item> items = new ArrayList<>();
 
     public void putIntoInventory(Item item) {
         items.add(item);
     }
-
+    public void printLatestItemFromInventory() {
+            System.out.println(items.get(items.size() - 1) + "\n");
+    }
     public void printInventoryList() {
-        for (Item item : items) {
-            System.out.println(item);
+        if (getInventorySize() == 0) {
+            System.out.println("В инвентаре нет вещей\n");
         }
+        else {
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        }
+    }
+
+    public ArrayList<Item> getUsableItems() {
+        ArrayList <Item> usableItems = new ArrayList<>();
+
+        if (getInventorySize() == 0) {
+            System.out.println("В инвентаре нет вещей\n");
+        }
+        else {
+            for (Item item : items) {
+                if (item.usable) {
+                    usableItems.add(item);
+                }
+            }
+        }
+        return usableItems;
+    }
+
+    public void printUsableItems() {
+        if (getInventorySize() == 0) {
+            System.out.println("В инвентаре нет вещей\n");
+        }
+        else {
+            int count = 1;
+            for (Item item : items) {
+                if (item.usable) {
+                    System.out.println(count++ + " " + item);
+                }
+            }
+        }
+    }
+
+    public int getNumberOfUsableItems () {
+        if (getInventorySize() == 0) {
+            System.out.println("В инвентаре нет вещей\n");
+        }
+        else {
+            int count = 0;
+            for (Item item : items) {
+                if (item.usable) {
+                    count++;
+                }
+            }
+            return count;
+        }
+        return 0;
+    }
+
+    public void deleteItemFromInventory(Item item) {
+        for (int i = 0; i < getInventorySize(); i++) {
+            if (item.getName().equals(items.get(i).getName())) {
+                items.remove(i);
+                return;
+            }
+        }
+
+    }
+
+    public int getInventorySize() {
+        return items.size();
     }
 
 }

@@ -6,6 +6,7 @@ public class Location {
     public int id;
     String name;
     String description;
+
     public List <Location> locations;
 
     public Location(int id, String name, String description, LocationType locationType) {
@@ -28,7 +29,6 @@ public class Location {
     public Location getLocationById (int id) {
         return locations.get(id);
     }
-
 
     public int[] getNext(Location location) {
         switch (location.id) {
