@@ -1,12 +1,16 @@
 import items.Item;
 import items.ItemGenerator;
+import map.DangerLocation;
+import map.Location;
+import map.Seller;
+import player.Player;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Runner {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -20,15 +24,30 @@ public class Runner {
 
         int way;
         while (true) {
-            int check;
 
+            if (player.playerLocation.id == 4) {
+                DangerLocation dangerLocation = new DangerLocation();
+                if (dangerLocation.dangerLocationScenario(player)) {
+                    player.playerLocation = new Location().getLocationById(5);
+                }
+                else {
+                    player.playerLocation = new Location().getLocationById(1);
+                }
+                continue;
+            }
+
+            int check;
             System.out.println("Что вы хотите сделать?\n" +
                     "1: Идти\n" +
                     "2: Взять предмет\n" +
                     "3: Осмотреться\n" +
                     "4: Посмотреть инвентарь\n" +
                     "5: Воспользоваться предметом\n" +
-                    "6: Выход\n");
+                    "6: Выход");
+            if (player.playerLocation.id == 1) {
+                System.out.print("\b\b");
+                System.out.println("6: Продать вещи\n");
+            }
             try {
                 check = scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -36,7 +55,8 @@ public class Runner {
                 scanner = new Scanner(System.in);
                 continue;
             }
-            if (check > 6 || check <= 0) {
+            //TODO SELLER CHECK
+            if (check > 100 || check <= 0) {
                 System.err.println("Неверный параметр\n");
                 continue;
             }
@@ -55,12 +75,11 @@ public class Runner {
                     continue;
                 }
                 player.go(way);
-                player.lookAround();
-
+                System.out.println("Ваша локация: " + player.playerLocation + '\n');
             }
             else if (check == 2) {
                 int itemIndex;
-                player.playerInventory.printInventoryList();
+
                 System.out.println("Какой предмет вы хотите взять?");
                 System.out.println("0: назад");
 
@@ -111,16 +130,22 @@ public class Runner {
                 }
                 if (itemIndex == 0)
                     continue;
-//                if (itemIndex > player.playerInventory.getInventorySize() - 1 ||
-//                        itemIndex < 0) {
-//                    System.err.println("Неверный параметр\n");
-//                    continue;
-//                }
+                if (itemIndex > player.playerInventory.getNumberOfUsableItems() ||
+                        itemIndex < 0) {
+                    System.err.println("Неверный параметр\n");
+                    continue;
+                }
                 player.useItem(usableItems.get(itemIndex - 1));
             }
             else if (check == 6) {
-                return ;
+                return;
+            }
+            else if (check == 7) {
+                Seller seller = new Seller();
+                seller.sellerLocationScenario(player);
             }
         }
+
     }
+
 }

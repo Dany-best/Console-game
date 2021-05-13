@@ -17,10 +17,14 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
+            int count = 1;
             for (Item item : items) {
-                System.out.println(item);
+                System.out.println(count++ + ": " + item);
             }
         }
+    }
+    public Item getItemByIndex(int index) {
+        return items.get(index);
     }
 
     public ArrayList<Item> getUsableItems() {
@@ -69,6 +73,15 @@ public class PlayerInventory {
         return 0;
     }
 
+    public boolean findInventoryItem(String itemName) {
+        for (int i = 0; i < getInventorySize(); i++) {
+            if (itemName.equals(items.get(i).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void deleteItemFromInventory(Item item) {
         for (int i = 0; i < getInventorySize(); i++) {
             if (item.getName().equals(items.get(i).getName())) {
@@ -76,7 +89,6 @@ public class PlayerInventory {
                 return;
             }
         }
-
     }
 
     public int getInventorySize() {

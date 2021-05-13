@@ -13,6 +13,9 @@ public class Item {
     public ArrayList <ArrayList<Item>> items = new ArrayList<>();
 
     public Item() {}
+    public Item(String name) {
+        this.name = name;
+    }
     public Item(String name, int weight, int cost, boolean usable) {
         this.name = name;
         this.weight = weight;
@@ -21,6 +24,9 @@ public class Item {
     }
     public String getName() {
         return name;
+    }
+    public int getCost() {
+        return cost;
     }
 
     @Override

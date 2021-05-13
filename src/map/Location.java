@@ -42,6 +42,10 @@ public class Location {
         }
     }
 
+    public String getLocationName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return name + ": " + description;

@@ -1,13 +1,15 @@
+package player;
+
 import items.Item;
 import items.PlayerInventory;
 import map.Location;
 
 public class Player {
     int health = 100;
-    long money;
-    public int hunger;
-    PlayerInventory playerInventory = new PlayerInventory();
-    Location playerLocation;
+    public int hunger = 100;
+    long gold;
+    public PlayerInventory playerInventory = new PlayerInventory();
+    public Location playerLocation;
     Location location = new Location();
 
     public Player() {
@@ -22,6 +24,8 @@ public class Player {
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
         }
+        System.out.println("Здоровье: " + health);
+        System.out.println("Сытость: " + hunger);
         System.out.println();
     }
 
@@ -57,12 +61,16 @@ public class Player {
         System.out.println();
     }
 
+    public void damageHealth(int damage) {
+        health -= damage;
+        checkHealth();
+    }
+
     public void checkHealth() {
         if (health <= 0) {
-            System.out.println("Your health is " + "health\nGame over");
+            System.out.println("Your health is " + health + "\nGame over");
             System.exit(0);
         }
-        System.out.println();
     }
 
     public void useItem(Item item) {
@@ -70,7 +78,7 @@ public class Player {
             case "Поганка":
                 hunger += 10; health -= 10; break;
             case "Белый гриб":
-                hunger += 10; break;
+                hunger += 10; health += 10; break;
             case "Бинт":
                 health += 30; break;
             case "Мухомор":
@@ -79,15 +87,13 @@ public class Player {
                 hunger += 15; break;
         }
         playerInventory.deleteItemFromInventory(item);
+        checkHealth();
     }
 
-    public void dropItem(Item item) {
-
+    public void addGold(int itemCost) {
+        gold += itemCost;
     }
 
-    public void take(Item item) {
-        playerInventory.putIntoInventory(item);
-    }
 
 
 }
