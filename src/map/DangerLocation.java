@@ -45,6 +45,20 @@ public class DangerLocation extends Location {
         }
     }
 
+    public void startDangerLocationScenario(Player player) {
+
+            if (dangerLocationScenario(player)) {
+                player.playerLocation = new Location().getLocationById(5);
+            }
+            else {
+                player.playerLocation = new Location().getLocationById(1);
+            }
+    }
+
+    public static boolean isLocationDanger(Player player) {
+        return player.playerLocation.id == 4;
+    }
+
     public void defenceWithoutKnife(int damage, String message, Player player) {
         System.out.println(message + damage);
         player.damageHealth(damage);

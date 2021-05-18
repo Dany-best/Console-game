@@ -24,15 +24,9 @@ public class Runner {
 
         int way;
         while (true) {
-
-            if (player.playerLocation.id == 4) {
+            if (DangerLocation.isLocationDanger(player)) {
                 DangerLocation dangerLocation = new DangerLocation();
-                if (dangerLocation.dangerLocationScenario(player)) {
-                    player.playerLocation = new Location().getLocationById(5);
-                }
-                else {
-                    player.playerLocation = new Location().getLocationById(1);
-                }
+                dangerLocation.startDangerLocationScenario(player);
                 continue;
             }
 
