@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public class ItemGenerator extends Item {
 
-    static Item[] arr_items = {
+    public static Item[] arr_items = {
             new Item("Поганка", 2, 1, true),
             new Item("Белый гриб", 4, 10, true),
             new Item("Драгоценность", 10, 100, false),

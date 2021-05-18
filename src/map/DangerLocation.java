@@ -14,7 +14,7 @@ public class DangerLocation extends Location {
         int damage;
 
         while (true) {
-            System.out.println("На вас напали волки, защищаться ножом?\n1: да\n" +
+            System.out.println("На вас напали дикие кабаны, защищаться ножом?\n1: да\n" +
                     "2: отбиться как есть\n" +
                     "3: отступить");
             Scanner scanner = new Scanner(System.in);

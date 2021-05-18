@@ -7,6 +7,7 @@ import map.Location;
 public class Player {
     int health = 100;
     public int hunger = 100;
+    public int numberOfAvailableLocations;
     long gold;
     public PlayerInventory playerInventory = new PlayerInventory();
     public Location playerLocation;
@@ -26,14 +27,17 @@ public class Player {
         }
         System.out.println("Здоровье: " + health);
         System.out.println("Сытость: " + hunger);
+        System.out.println("Монеты: " + gold);
         System.out.println();
     }
 
     public void printAvailableLocations() {
+        numberOfAvailableLocations = 0;
         int []arr = location.getNext(playerLocation);
         System.out.println("Доступные локации:");
         for (int i = 0; i < arr.length; i++) {
             System.out.println(i + 1 +" " + location.locations.get(arr[i]));
+            numberOfAvailableLocations++;
         }
         System.out.println();
     }
@@ -93,7 +97,4 @@ public class Player {
     public void addGold(int itemCost) {
         gold += itemCost;
     }
-
-
-
 }

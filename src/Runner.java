@@ -4,65 +4,55 @@ import map.DangerLocation;
 import map.Location;
 import map.Seller;
 import player.Player;
-
+import processor.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Runner {
 
+    static Scanner createScanner() {
+        return new Scanner(System.in);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        ChooseLocation chooseLocation = new ChooseLocation();
+        ChooseItem chooseItem = new ChooseItem();
+        UseItem useItem = new UseItem();
         System.out.println("Нажмите 'enter', чтобы начать");
         if (scanner.nextLine().length() != 0)
             return ;
         Player player = new Player();
+        Input input = new Input();
         ItemGenerator itemGenerator = new ItemGenerator();
         itemGenerator.generateItems();
         player.lookAround();
 
         int way;
         while (true) {
+            int check;
             if (DangerLocation.isLocationDanger(player)) {
                 DangerLocation dangerLocation = new DangerLocation();
                 dangerLocation.startDangerLocationScenario(player);
                 continue;
             }
 
-            int check;
-            System.out.println("Что вы хотите сделать?\n" +
-                    "1: Идти\n" +
-                    "2: Взять предмет\n" +
-                    "3: Осмотреться\n" +
-                    "4: Посмотреть инвентарь\n" +
-                    "5: Воспользоваться предметом\n" +
-                    "6: Выход");
-            if (player.playerLocation.id == 1) {
-                System.out.print("\b\b");
-                System.out.println("6: Продать вещи\n");
-            }
-            try {
-                check = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.err.println("Неверный параметр\n");
-                scanner = new Scanner(System.in);
+            Processor.printAvailableToDos(player.playerLocation);
+            check = new Input().getInput(scanner);
+            if (check == -1) {
+                scanner = createScanner();
                 continue;
             }
-            //TODO SELLER CHECK
-            if (check > 100 || check <= 0) {
-                System.err.println("Неверный параметр\n");
+            if (!input.isCheckInRange(check, player.playerLocation)) {
+                input.incorrectParamMessage();
+                scanner = createScanner();
                 continue;
             }
             if (check == 1) {
-                System.out.println("Выберите локацию");
-                player.printAvailableLocations();
-                System.out.println("0: Назад");
-                try {
-                    way = scanner.nextInt();
-                } catch (InputMismatchException e) {
-                    System.err.println("Неверный параметр\n");
-                    scanner = new Scanner(System.in);
+                chooseLocation.start(player);
+                way = chooseLocation.isInputCorrect(scanner);
+                if (!chooseLocation.chooseLocation(way, player)) {
+                    scanner = createScanner();
                     continue;
                 }
                 if (way == 0) {
@@ -74,27 +64,21 @@ public class Runner {
             else if (check == 2) {
                 int itemIndex;
 
-                System.out.println("Какой предмет вы хотите взять?");
-                System.out.println("0: назад");
-
-                if (itemGenerator.getItemsArrayLen(player.playerLocation.id -1) == 0) {
-                    System.out.println("На данной локации нет доступных вещей\n");
+                if (!chooseItem.checkAvailableItems(itemGenerator, player)) {
                     continue;
                 }
+
+                System.out.println("Какой предмет вы хотите взять?\n" +
+                        "0: назад\n");
                 System.out.println(itemGenerator.getItemArray(player.playerLocation.id - 1));
 
-                try {
-                    itemIndex = scanner.nextInt();
-                } catch (InputMismatchException e) {
-                    System.err.println("Неверный параметр\n");
-                    scanner = new Scanner(System.in);
+                itemIndex = chooseItem.isInputCorrect(scanner);
+
+                if (!chooseItem.checkItemsRange(itemIndex, player, itemGenerator)) {
+                    scanner = createScanner();
                     continue;
                 }
-                if (itemIndex == 0)
-                    continue;
-                if (itemIndex > itemGenerator.getItemsArrayLen(player.playerLocation.id - 1) ||
-                itemIndex < 0) {
-                    System.err.println("Неверный параметр\n");
+                if (itemIndex == 0) {
                     continue;
                 }
                 player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
@@ -103,32 +87,30 @@ public class Runner {
                 System.out.print("Вы взяли: ");
                 player.playerInventory.printLatestItemFromInventory();
             }
+
             else if (check == 3) {
                 player.lookAround();
             }
+
             else if (check == 4) {
                 player.playerInventory.printInventoryList();
             }
+
             else if (check == 5) {
                 int itemIndex;
                 System.out.println("Выберите предмет:");
                 System.out.println("0: Назад");
                 player.playerInventory.printUsableItems();
                 ArrayList <Item> usableItems = player.playerInventory.getUsableItems();
-                try {
-                    itemIndex = scanner.nextInt();
-                } catch (InputMismatchException e) {
-                    System.err.println("Неверный параметр\n");
-                    scanner = new Scanner(System.in);
+                itemIndex = useItem.isInputCorrect(scanner);
+                if (itemIndex == -1) {
+                    scanner = createScanner();
                     continue;
                 }
                 if (itemIndex == 0)
                     continue;
-                if (itemIndex > player.playerInventory.getNumberOfUsableItems() ||
-                        itemIndex < 0) {
-                    System.err.println("Неверный параметр\n");
+                if (!useItem.checkUsableItemsRange(itemIndex, player))
                     continue;
-                }
                 player.useItem(usableItems.get(itemIndex - 1));
             }
             else if (check == 6) {
@@ -139,7 +121,5 @@ public class Runner {
                 seller.sellerLocationScenario(player);
             }
         }
-
     }
-
 }
