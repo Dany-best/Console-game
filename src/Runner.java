@@ -53,7 +53,6 @@ public class Runner {
                     scanner = createScanner();
                     continue;
                 }
-
                 player.go(way);
                 System.out.println("Ваша локация: " + player.playerLocation + '\n');
             }
@@ -70,11 +69,8 @@ public class Runner {
 
                 itemIndex = chooseItem.isInputCorrect(scanner);
 
-                if (!chooseItem.checkItemsRange(itemIndex, player, itemGenerator)) {
+                if (!chooseItem.checkItemsRange(itemIndex, player, itemGenerator) || itemIndex == 0) {
                     scanner = createScanner();
-                    continue;
-                }
-                if (itemIndex == 0) {
                     continue;
                 }
                 player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
