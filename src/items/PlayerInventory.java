@@ -41,13 +41,9 @@ public class PlayerInventory {
     }
 
     public void printUsableItems() {
-
-            int count = 1;
-            for (Item item : items) {
-                if (item.usable) {
-                    System.out.println(count++ + " " + item);
-                }
-            }
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        items.stream().filter(item -> item.usable).peek(x -> atomicInteger.getAndIncrement())
+                .forEach(res -> System.out.println(atomicInteger + " " + res));
     }
 
     public int getNumberOfUsableItems () {
