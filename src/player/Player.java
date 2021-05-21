@@ -1,12 +1,14 @@
 package player;
 
 import items.Item;
+import items.ItemGenerator;
 import items.PlayerInventory;
 import map.Location;
 
 public class Player {
     int health = 100;
-    public int hunger = 100;
+    int hunger = 100;
+    int inventoryCapacity = 10;
     public int numberOfAvailableLocations;
     long gold;
     public PlayerInventory playerInventory = new PlayerInventory();
@@ -15,6 +17,10 @@ public class Player {
 
     public Player() {
         playerLocation = location.locations.get(1);
+    }
+
+    public int getInventoryCapacity() {
+        return inventoryCapacity;
     }
 
     public void lookAround() {
@@ -28,6 +34,7 @@ public class Player {
         System.out.println("Здоровье: " + health);
         System.out.println("Сытость: " + hunger);
         System.out.println("Монеты: " + gold);
+        System.out.println("Размер инвентаря: " + inventoryCapacity);
         System.out.println();
     }
 
@@ -40,10 +47,6 @@ public class Player {
             numberOfAvailableLocations++;
         }
         System.out.println();
-    }
-
-    public void printCurrentLocation() {
-        System.out.println("Текущая локация" + playerLocation + "\n");
     }
 
     public void go(int id) {
@@ -60,6 +63,12 @@ public class Player {
             System.err.println("Неверный путь, выберите другой");
         }
         else {
+            if (hunger < 80 && hunger > 50)
+                health -= 5;
+            else if (hunger < 50)
+                health -= 10;
+            hunger -= 10;
+            checkHealth();
             playerLocation = location.getLocationById(remind);
         }
         System.out.println();
@@ -80,18 +89,36 @@ public class Player {
     public void useItem(Item item) {
         switch (item.getName()) {
             case "Поганка":
-                hunger += 10; health -= 10; break;
+                System.out.println("Сытость: +10, Здоровье -10");
+                hunger += 10; health -= 10; inventoryCapacity += ItemGenerator.arr_items[0].getWeight(); break;
             case "Белый гриб":
-                hunger += 10; health += 10; break;
+                System.out.println("Сытость: +10, Здоровье +10");
+                hunger += 10; health += 10; inventoryCapacity += ItemGenerator.arr_items[1].getWeight(); break;
             case "Бинт":
-                health += 30; break;
+                System.out.println("Здоровье +30");
+                health += 30; inventoryCapacity += ItemGenerator.arr_items[3].getWeight(); break;
             case "Мухомор":
-                hunger += 20; health -= 20; break;
+                System.out.println("Сытость: +20, Здоровье -20");
+                hunger += 20; health -= 20; inventoryCapacity += ItemGenerator.arr_items[4].getWeight(); break;
             case "Шампиньонs" :
-                hunger += 15; break;
+                System.out.println("Сытость: +15");
+                hunger += 15; inventoryCapacity += ItemGenerator.arr_items[5].getWeight(); break;
+        }
+        if (hunger > 100) {
+            hunger = 100;
+        }
+        if (health > 100) {
+            health = 100;
         }
         playerInventory.deleteItemFromInventory(item);
         checkHealth();
+    }
+
+    public void increaseInventoryCapacity(Item item) {
+        inventoryCapacity += item.getWeight();
+    }
+    public void decreaseInventoryCapacity(Item item) {
+        inventoryCapacity -= item.getWeight();
     }
 
     public void addGold(int itemCost) {

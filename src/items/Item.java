@@ -29,6 +29,10 @@ public class Item {
         return cost;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
     @Override
     public String toString() {
         return name +

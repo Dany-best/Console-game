@@ -7,6 +7,7 @@ import items.ItemGenerator;
 import java.util.Scanner;
 import processor.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class LocationTest {
@@ -20,8 +21,8 @@ public class LocationTest {
     private static ItemGenerator itemGenerator;
     private static ByteArrayOutputStream outContent;
     private static ByteArrayOutputStream errContent;
-    private static PrintStream originalOut;
-    private static PrintStream originalErr;
+    private final static PrintStream originalOut = System.out;
+    private final static PrintStream originalErr = System.err;
 
     @BeforeClass
     public static void createObjects() {
@@ -33,8 +34,6 @@ public class LocationTest {
         player = new Player();
         outContent = new ByteArrayOutputStream();
         errContent = new ByteArrayOutputStream();
-        originalOut = System.out;
-        originalErr = System.err;
         itemGenerator = new ItemGenerator();
         itemGenerator.generateItems();
     }
@@ -49,9 +48,6 @@ public class LocationTest {
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
-    }
-    @After
-    public void clearList() {
         player.playerInventory.items.clear();
     }
 
@@ -130,10 +126,15 @@ public class LocationTest {
     }
 
     @Test
-    public void emptyInventoryShouldPrintNoItemsInInventory() {
-        player.playerInventory.getNumberOfUsableItems();
-        assertEquals("В инвентаре нет вещей",
-                outContent.toString().trim());
+    public void emptyInventoryShouldReturnZero() {
+        assertEquals(0, player.playerInventory.getNumberOfUsableItems());
+    }
+
+    @Test
+    public void noItemsInMapShouldReturnTrue() {
+        ItemGenerator itemGenerator2 = new ItemGenerator();
+        itemGenerator2.items.clear();
+        assertTrue(itemGenerator2.isThereNoItemsInMap());
     }
 }
 

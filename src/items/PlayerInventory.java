@@ -87,6 +87,14 @@ public class PlayerInventory {
         }
     }
 
+    public static Item getItemByName(Item item) {
+        for (int i = 0; i < ItemGenerator.arr_items.length; i++) {
+            if (item.getName().equals(ItemGenerator.arr_items[i].getName()))
+                return ItemGenerator.arr_items[i];
+        }
+        return null;
+    }
+
     public int getInventorySize() {
         return items.size();
     }

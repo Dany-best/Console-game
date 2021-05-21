@@ -28,6 +28,10 @@ public class Runner {
         int way;
         while (true) {
             int check;
+            if (itemGenerator.isThereNoItemsInMap()) {
+                System.out.println("Поздравляем! Вы прошли игру!");
+                return;
+            }
             if (DangerLocation.isLocationDanger(player)) {
                 DangerLocation dangerLocation = new DangerLocation();
                 dangerLocation.startDangerLocationScenario(player);
@@ -79,7 +83,6 @@ public class Runner {
                     scanner = createScanner();
                     continue;
                 }
-
                 player.useItem(usableItems.get(itemIndex - 1));
             }
             else if (check == 6) {

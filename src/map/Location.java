@@ -42,6 +42,7 @@ public class Location {
         }
     }
 
+
     public String getLocationName() {
         return name;
     }

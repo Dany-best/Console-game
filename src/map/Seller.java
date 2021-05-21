@@ -20,6 +20,7 @@ public class Seller extends Location{
         }
         player.addGold(player.playerInventory.getItemByIndex(choice - 1).getCost());
         System.out.println();
+        player.increaseInventoryCapacity(player.playerInventory.getItemByIndex(choice - 1));
         player.playerInventory.deleteItemFromInventory(player.playerInventory.getItemByIndex(choice - 1));
     }
 }

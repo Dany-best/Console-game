@@ -31,6 +31,5 @@ public class UseItem implements ScannerException {
 
     @Override
     public void printMessage(String message) {
-
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ItemGenerator extends Item {
 
@@ -15,7 +16,7 @@ public class ItemGenerator extends Item {
             new Item("Мухомор", 3, 1, true),
             new Item("Шампиньонs", 5, 5, true),
             new Item("Монеты", 0, 1, false),
-            new Item("Нож", 10, 80, false)
+            new Item("Нож", 2, 80, false)
     };
 
 
@@ -43,7 +44,6 @@ public class ItemGenerator extends Item {
             }
             items.add(arr);
         }
-
     }
 
     public String getItemArray(int index) {
@@ -67,14 +67,13 @@ public class ItemGenerator extends Item {
         items.get(arrayIndex).remove(itemIndex);
     }
 
-    public void printList() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < items.size(); i++) {
-            for (int j = 0; j < items.get(i).size(); j++) {
-                stringBuilder.append(items.get(i).get(j)).append(", ");
+    public boolean isThereNoItemsInMap() {
+        boolean check = false;
+        for (ArrayList<Item> item : items) {
+            if (!item.isEmpty()) {
+                return false;
             }
-            stringBuilder.append('\n');
         }
-        System.out.println(stringBuilder.toString());
+        return true;
     }
 }

@@ -1,6 +1,8 @@
 package processor;
 
+import items.Item;
 import items.ItemGenerator;
+import items.PlayerInventory;
 import map.Location;
 import player.Player;
 
@@ -22,12 +24,23 @@ public class Processor {
             System.out.println("7: Продать вещи");
         }
     }
+
+
     public static void itemTakeProcessor(ItemGenerator itemGenerator, Player player, int itemIndex) {
+        Item item = PlayerInventory.getItemByName
+                (itemGenerator.getItemFromArray(player.playerLocation.id - 1, itemIndex - 1));
+        if (player.getInventoryCapacity() - item.getWeight() < 0) {
+            System.out.println("Недостаточно места в инвентаре");
+            return;
+        }
         player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
                 itemIndex - 1));
         itemGenerator.removeItemFromMap(player.playerLocation.id - 1, itemIndex - 1);
         System.out.print("Вы взяли: ");
+
+        player.decreaseInventoryCapacity(item);
         player.playerInventory.printLatestItemFromInventory();
+        System.out.println("В инвентаре осталось места: " + player.getInventoryCapacity());
     }
     public static void useItemProcessor(Player player) {
         System.out.println("Выберите предмет:");

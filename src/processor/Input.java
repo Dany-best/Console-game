@@ -15,9 +15,6 @@ public class Input implements ScannerException {
 
     public int getInput (Scanner scanner) {
         this.input = isInputCorrect(scanner);
-//        if (input == -1) {
-//            incorrectParamMessage();
-//        }
         return input;
     }
 

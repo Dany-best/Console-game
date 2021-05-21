@@ -8,11 +8,6 @@ import java.util.Scanner;
 
 public class ChooseItem implements ScannerException {
 
-    public void start() {
-        System.out.println("Какой предмет вы хотите взять?");
-        System.out.println("0: назад");
-    }
-
     public int initItemIndex(ItemGenerator itemGenerator, Player player, Scanner scanner) {
         System.out.println("Какой предмет вы хотите взять?\n" +
                 "0: назад\n");
@@ -21,6 +16,7 @@ public class ChooseItem implements ScannerException {
     }
 
     public boolean checkAvailableItems(ItemGenerator itemGenerator, Player player) {
+
         if (itemGenerator.getItemsArrayLen(player.playerLocation.id -1) == 0) {
             System.out.println("На данной локации нет доступных вещей\n");
             return false;
