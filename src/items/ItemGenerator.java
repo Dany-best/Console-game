@@ -2,6 +2,10 @@ package items;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ItemGenerator extends Item {
 
@@ -35,10 +39,9 @@ public class ItemGenerator extends Item {
         for (int i = 0; i < 6; i++) {
             int rand = getRandom(i);
             ArrayList<Item> arr = new ArrayList<>();
-            for (int j = 0; j < rand; j++) {
-                int secondRand = new Random().nextInt(arr_items.length) ;
-                arr.add(j, arr_items[secondRand]);
-            }
+            Random random = new Random();
+            Supplier <Integer> supplier = () -> random.nextInt(arr_items.length);
+            Stream.iterate(0, x -> x + 1).limit(rand).forEach((x) -> arr.add(x, arr_items[supplier.get()]));
             items.add(arr);
         }
     }

@@ -53,6 +53,7 @@ public class Player {
         int []arr = location.getNext(playerLocation);
         boolean check = false;
         int remind = 0;
+
         for (int i = 0; i < arr.length; i++) {
             if (id == i + 1) {
                 check = true;
