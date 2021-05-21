@@ -1,8 +1,5 @@
-import items.Item;
-import items.ItemGenerator;
-import map.DangerLocation;
-import map.Location;
-import map.Seller;
+import items.*;
+import map.*;
 import player.Player;
 import processor.*;
 import java.util.ArrayList;
@@ -63,11 +60,7 @@ public class Runner {
                     continue;
                 }
 
-                System.out.println("Какой предмет вы хотите взять?\n" +
-                        "0: назад\n");
-                System.out.println(itemGenerator.getItemArray(player.playerLocation.id - 1));
-
-                itemIndex = chooseItem.isInputCorrect(scanner);
+                itemIndex = chooseItem.initItemIndex(itemGenerator, player, scanner);
 
                 if (!chooseItem.checkItemsRange(itemIndex, player, itemGenerator) || itemIndex == 0) {
                     scanner = createScanner();

@@ -13,6 +13,13 @@ public class ChooseItem implements ScannerException {
         System.out.println("0: назад");
     }
 
+    public int initItemIndex(ItemGenerator itemGenerator, Player player, Scanner scanner) {
+        System.out.println("Какой предмет вы хотите взять?\n" +
+                "0: назад\n");
+        System.out.println(itemGenerator.getItemArray(player.playerLocation.id - 1));
+        return this.isInputCorrect(scanner);
+    }
+
     public boolean checkAvailableItems(ItemGenerator itemGenerator, Player player) {
         if (itemGenerator.getItemsArrayLen(player.playerLocation.id -1) == 0) {
             System.out.println("На данной локации нет доступных вещей\n");
