@@ -25,7 +25,6 @@ public class Processor {
         }
     }
 
-
     public static void itemTakeProcessor(ItemGenerator itemGenerator, Player player, int itemIndex) {
         Item item = PlayerInventory.getItemByName
                 (itemGenerator.getItemFromArray(player.playerLocation.id - 1, itemIndex - 1));

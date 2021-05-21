@@ -2,9 +2,6 @@ package items;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.IntFunction;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class ItemGenerator extends Item {
 
@@ -68,7 +65,6 @@ public class ItemGenerator extends Item {
     }
 
     public boolean isThereNoItemsInMap() {
-        boolean check = false;
         for (ArrayList<Item> item : items) {
             if (!item.isEmpty()) {
                 return false;

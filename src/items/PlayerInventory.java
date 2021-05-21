@@ -35,11 +35,7 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            for (Item item : items) {
-                if (item.usable) {
-                    usableItems.add(item);
-                }
-            }
+            items.stream().filter(x -> x.usable).forEach(usableItems::add);
         }
         return usableItems;
     }
