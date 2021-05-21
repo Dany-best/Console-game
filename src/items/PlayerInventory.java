@@ -51,13 +51,7 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            int count = 0;
-            for (Item item : items) {
-                if (item.usable) {
-                    count++;
-                }
-            }
-            return count;
+            return (int)items.stream().filter(item -> item.usable).count();
         }
         return 0;
     }
