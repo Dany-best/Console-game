@@ -72,6 +72,9 @@ public class Runner {
             }
             else if (check == 4) {
                 player.playerInventory.printInventoryList();
+                System.out.println("0: назад");
+                input.isInputCorrect(scanner);
+                scanner = createScanner();
             }
             else if (check == 5) {
                 int itemIndex;

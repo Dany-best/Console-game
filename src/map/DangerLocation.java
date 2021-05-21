@@ -49,6 +49,7 @@ public class DangerLocation extends Location {
 
             if (dangerLocationScenario(player)) {
                 player.playerLocation = new Location().getLocationById(5);
+                System.out.println("Вы на локации грибное место! Соберите нужные вещи!");
             }
             else {
                 player.playerLocation = new Location().getLocationById(1);

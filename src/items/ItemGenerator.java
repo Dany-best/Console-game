@@ -41,7 +41,9 @@ public class ItemGenerator extends Item {
             ArrayList<Item> arr = new ArrayList<>();
             Random random = new Random();
             Supplier <Integer> supplier = () -> random.nextInt(arr_items.length);
-            Stream.iterate(0, x -> x + 1).limit(rand).forEach((x) -> arr.add(x, arr_items[supplier.get()]));
+            Stream.iterate(0, x -> x + 1)
+                    .limit(rand)
+                    .forEach((x) -> arr.add(x, arr_items[supplier.get()]));
             items.add(arr);
         }
     }

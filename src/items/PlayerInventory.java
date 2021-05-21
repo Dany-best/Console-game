@@ -3,7 +3,6 @@ package items;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class PlayerInventory {
@@ -20,9 +19,8 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            AtomicInteger atomicInteger = new AtomicInteger(0);
-            items.stream().peek(x -> atomicInteger.getAndIncrement())
-                    .forEach(res -> System.out.println(atomicInteger + ": " + res));
+            Stream.iterate(0, x -> x + 1).limit(items.size()).forEach(x ->
+                    System.out.println(x + 1 + ": " + items.get(x)));
         }
     }
     public Item getItemByIndex(int index) {
@@ -36,14 +34,18 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            items.stream().filter(x -> x.usable).forEach(usableItems::add);
+            items.stream()
+                    .filter(x -> x.usable)
+                    .forEach(usableItems::add);
         }
         return usableItems;
     }
 
     public void printUsableItems() {
         AtomicInteger atomicInteger = new AtomicInteger(0);
-        items.stream().filter(item -> item.usable).peek(x -> atomicInteger.getAndIncrement())
+        items.stream().
+                filter(item -> item.usable)
+                .peek(x -> atomicInteger.getAndIncrement())
                 .forEach(res -> System.out.println(atomicInteger + " " + res));
     }
 
@@ -52,7 +54,9 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            return (int)items.stream().filter(item -> item.usable).count();
+            return (int)items.stream()
+                    .filter(item -> item.usable)
+                    .count();
         }
         return 0;
     }
