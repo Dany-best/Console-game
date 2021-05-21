@@ -2,14 +2,12 @@ package items;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ItemGenerator extends Item {
 
-    public static Item[] arr_items = {
+    public static Item[] arrItems = {
             new Item("Поганка", 2, 1, true),
             new Item("Белый гриб", 4, 10, true),
             new Item("Драгоценность", 10, 100, false),
@@ -40,10 +38,10 @@ public class ItemGenerator extends Item {
             int rand = getRandom(i);
             ArrayList<Item> arr = new ArrayList<>();
             Random random = new Random();
-            Supplier <Integer> supplier = () -> random.nextInt(arr_items.length);
+            Supplier <Integer> supplier = () -> random.nextInt(arrItems.length);
             Stream.iterate(0, x -> x + 1)
                     .limit(rand)
-                    .forEach((x) -> arr.add(x, arr_items[supplier.get()]));
+                    .forEach((x) -> arr.add(x, arrItems[supplier.get()]));
             items.add(arr);
         }
     }

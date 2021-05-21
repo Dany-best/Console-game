@@ -19,8 +19,9 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            Stream.iterate(0, x -> x + 1).limit(items.size()).forEach(x ->
-                    System.out.println(x + 1 + ": " + items.get(x)));
+            Stream.iterate(0, x -> x + 1)
+                    .limit(items.size())
+                    .forEach(x -> System.out.println(x + 1 + ": " + items.get(x)));
         }
     }
     public Item getItemByIndex(int index) {
@@ -80,9 +81,9 @@ public class PlayerInventory {
     }
 
     public static Item getItemByName(Item item) {
-        for (int i = 0; i < ItemGenerator.arr_items.length; i++) {
-            if (item.getName().equals(ItemGenerator.arr_items[i].getName()))
-                return ItemGenerator.arr_items[i];
+        for (int i = 0; i < ItemGenerator.arrItems.length; i++) {
+            if (item.getName().equals(ItemGenerator.arrItems[i].getName()))
+                return ItemGenerator.arrItems[i];
         }
         return null;
     }

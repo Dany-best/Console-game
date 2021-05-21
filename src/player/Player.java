@@ -91,19 +91,19 @@ public class Player {
         switch (item.getName()) {
             case "Поганка":
                 System.out.println("Сытость: +10, Здоровье -10");
-                hunger += 10; health -= 10; inventoryCapacity += ItemGenerator.arr_items[0].getWeight(); break;
+                hunger += 10; health -= 10; inventoryCapacity += ItemGenerator.arrItems[0].getWeight(); break;
             case "Белый гриб":
                 System.out.println("Сытость: +10, Здоровье +10");
-                hunger += 10; health += 10; inventoryCapacity += ItemGenerator.arr_items[1].getWeight(); break;
+                hunger += 10; health += 10; inventoryCapacity += ItemGenerator.arrItems[1].getWeight(); break;
             case "Бинт":
                 System.out.println("Здоровье +30");
-                health += 30; inventoryCapacity += ItemGenerator.arr_items[3].getWeight(); break;
+                health += 30; inventoryCapacity += ItemGenerator.arrItems[3].getWeight(); break;
             case "Мухомор":
                 System.out.println("Сытость: +20, Здоровье -20");
-                hunger += 20; health -= 20; inventoryCapacity += ItemGenerator.arr_items[4].getWeight(); break;
+                hunger += 20; health -= 20; inventoryCapacity += ItemGenerator.arrItems[4].getWeight(); break;
             case "Шампиньонs" :
                 System.out.println("Сытость: +15");
-                hunger += 15; inventoryCapacity += ItemGenerator.arr_items[5].getWeight(); break;
+                hunger += 15; inventoryCapacity += ItemGenerator.arrItems[5].getWeight(); break;
         }
         if (hunger > 100) {
             hunger = 100;
@@ -121,7 +121,6 @@ public class Player {
     public void decreaseInventoryCapacity(Item item) {
         inventoryCapacity -= item.getWeight();
     }
-
     public void addGold(int itemCost) {
         gold += itemCost;
     }

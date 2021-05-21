@@ -27,7 +27,6 @@ public class Input implements ScannerException {
         }
     }
 
-
     @Override
     public int isInputCorrect(Scanner scanner) {
         int check;

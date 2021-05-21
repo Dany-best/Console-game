@@ -96,7 +96,7 @@ public class LocationTest {
 
     @Test
     public void itemCostShouldBeRightAdded() {
-        player.playerInventory.putIntoInventory(ItemGenerator.arr_items[2]);
+        player.playerInventory.putIntoInventory(ItemGenerator.arrItems[2]);
         int gold = player.playerInventory.getItemByIndex(0).getCost();
         assertEquals(1, player.playerInventory.items.size());
         assertEquals(100, gold);
