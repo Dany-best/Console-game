@@ -45,16 +45,15 @@ public class Runner {
                 scanner = createScanner();
                 continue;
             }
+
             if (check == 1) {
                 chooseLocation.start(player);
                 way = chooseLocation.isInputCorrect(scanner);
-                if (!chooseLocation.chooseLocation(way, player)) {
+                if (!chooseLocation.chooseLocation(way, player) || way == 0) {
                     scanner = createScanner();
                     continue;
                 }
-                if (way == 0) {
-                    continue;
-                }
+
                 player.go(way);
                 System.out.println("Ваша локация: " + player.playerLocation + '\n');
             }
