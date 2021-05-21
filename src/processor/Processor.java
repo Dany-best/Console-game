@@ -21,5 +21,4 @@ public class Processor {
             System.out.println("7: Продать вещи");
         }
     }
-
  }

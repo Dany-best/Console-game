@@ -39,11 +39,8 @@ public class Runner {
 
             Processor.printAvailableToDos(player.playerLocation);
             check = new Input().getInput(scanner);
-            if (check == -1) {
-                scanner = createScanner();
-                continue;
-            }
-            if (!input.isCheckInRange(check, player.playerLocation)) {
+
+            if (check == -1 || !input.isCheckInRange(check, player.playerLocation)) {
                 input.incorrectParamMessage();
                 scanner = createScanner();
                 continue;
