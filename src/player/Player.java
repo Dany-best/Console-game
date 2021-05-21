@@ -82,7 +82,7 @@ public class Player {
 
     public void checkHealth() {
         if (health <= 0) {
-            System.out.println("Your health is " + health + "\nGame over");
+            System.out.println("Ваше здоровье " + health + "\nИгра окончена");
             System.exit(0);
         }
     }
