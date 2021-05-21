@@ -2,6 +2,8 @@ package items;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class PlayerInventory {
     public List<Item> items = new ArrayList<>();
@@ -17,10 +19,9 @@ public class PlayerInventory {
             System.out.println("В инвентаре нет вещей\n");
         }
         else {
-            int count = 1;
-            for (Item item : items) {
-                System.out.println(count++ + ": " + item);
-            }
+            AtomicInteger atomicInteger = new AtomicInteger(0);
+            items.stream().peek(x -> atomicInteger.getAndIncrement())
+                    .forEach(res -> System.out.println(atomicInteger + ": " + res));
         }
     }
     public Item getItemByIndex(int index) {
