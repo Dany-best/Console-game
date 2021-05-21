@@ -128,5 +128,12 @@ public class LocationTest {
         assertEquals("Опасная тропа",
                 player.playerLocation.getLocationName());
     }
+
+    @Test
+    public void emptyInventoryShouldPrintNoItemsInInventory() {
+        player.playerInventory.getNumberOfUsableItems();
+        assertEquals("В инвентаре нет вещей",
+                outContent.toString().trim());
+    }
 }
 

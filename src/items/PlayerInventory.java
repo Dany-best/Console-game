@@ -44,17 +44,13 @@ public class PlayerInventory {
     }
 
     public void printUsableItems() {
-        if (getInventorySize() == 0) {
-            System.out.println("В инвентаре нет вещей\n");
-        }
-        else {
+
             int count = 1;
             for (Item item : items) {
                 if (item.usable) {
                     System.out.println(count++ + " " + item);
                 }
             }
-        }
     }
 
     public int getNumberOfUsableItems () {

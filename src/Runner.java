@@ -33,16 +33,13 @@ public class Runner {
                 dangerLocation.startDangerLocationScenario(player);
                 continue;
             }
-
             Processor.printAvailableToDos(player.playerLocation);
             check = new Input().getInput(scanner);
-
             if (check == -1 || !input.isCheckInRange(check, player.playerLocation)) {
                 input.incorrectParamMessage();
                 scanner = createScanner();
                 continue;
             }
-
             if (check == 1) {
                 chooseLocation.start(player);
                 way = chooseLocation.isInputCorrect(scanner);
@@ -59,43 +56,30 @@ public class Runner {
                 if (!chooseItem.checkAvailableItems(itemGenerator, player)) {
                     continue;
                 }
-
                 itemIndex = chooseItem.initItemIndex(itemGenerator, player, scanner);
-
                 if (!chooseItem.checkItemsRange(itemIndex, player, itemGenerator) || itemIndex == 0) {
                     scanner = createScanner();
                     continue;
                 }
-                player.playerInventory.putIntoInventory(itemGenerator.getItemFromArray(player.playerLocation.id - 1,
-                        itemIndex - 1));
-                itemGenerator.removeItemFromMap(player.playerLocation.id - 1, itemIndex - 1);
-                System.out.print("Вы взяли: ");
-                player.playerInventory.printLatestItemFromInventory();
+                Processor.itemTakeProcessor(itemGenerator, player, itemIndex);
             }
-
             else if (check == 3) {
                 player.lookAround();
             }
-
             else if (check == 4) {
                 player.playerInventory.printInventoryList();
             }
-
             else if (check == 5) {
                 int itemIndex;
-                System.out.println("Выберите предмет:");
-                System.out.println("0: Назад");
-                player.playerInventory.printUsableItems();
+                Processor.useItemProcessor(player);
                 ArrayList <Item> usableItems = player.playerInventory.getUsableItems();
                 itemIndex = useItem.isInputCorrect(scanner);
-                if (itemIndex == -1) {
+                if (itemIndex == -1 || itemIndex == 0 ||
+                        !useItem.checkUsableItemsRange(itemIndex, player)) {
                     scanner = createScanner();
                     continue;
                 }
-                if (itemIndex == 0)
-                    continue;
-                if (!useItem.checkUsableItemsRange(itemIndex, player))
-                    continue;
+
                 player.useItem(usableItems.get(itemIndex - 1));
             }
             else if (check == 6) {
